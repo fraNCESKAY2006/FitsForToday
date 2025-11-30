@@ -8,7 +8,11 @@ export const SavedOutfits: React.FC = () => {
   useEffect(() => {
     const data = localStorage.getItem('fitfortoday_saved');
     if (data) {
-      setSaved(JSON.parse(data));
+      try {
+        setSaved(JSON.parse(data));
+      } catch (e) {
+        console.error("Failed to parse saved outfits", e);
+      }
     }
   }, []);
 
@@ -55,7 +59,10 @@ export const SavedOutfits: React.FC = () => {
                     
                     <div className="mt-auto pt-4 border-t border-stone-100">
                         <h4 className="text-xs uppercase font-bold text-gold-600 mb-2">Key Items</h4>
-                        <p className="text-xs text-stone-600">{outfit.items.slice(0, 3).join(', ')}...</p>
+                        <p className="text-xs text-stone-600">
+                            {outfit.items && Array.isArray(outfit.items) ? outfit.items.slice(0, 3).join(', ') : 'Details unavailable'}
+                            {outfit.items && Array.isArray(outfit.items) && outfit.items.length > 3 ? '...' : ''}
+                        </p>
                     </div>
                 </div>
               </div>
