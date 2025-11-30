@@ -1,0 +1,7 @@
+{
+  "name": "FitForToday",
+  "description": "AI-powered personalized outfit recommendations based on real-time weather and occasion.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
